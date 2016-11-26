@@ -1,0 +1,15 @@
+.panel-primary .panel-heading {
+    background-color: #595f69 !important;
+}
+
+.btn-primary {
+    background-color: #595f69 !important;
+}
+
+.btn-primary:hover {
+    background-color: #3b414b !important;
+}
+
+.btn-danger {
+    background-color: #595f69 !important;
+}

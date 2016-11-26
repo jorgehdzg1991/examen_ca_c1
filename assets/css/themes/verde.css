@@ -1,0 +1,15 @@
+.panel-primary .panel-heading {
+    background-color: #50dfab !important;
+}
+
+.panel-primary .panel-body {
+    border-top: 2px solid #50dfab !important;
+}
+
+.btn-primary {
+    background-color: #50dfab !important;
+}
+
+.btn-primary:hover {
+    background-color: #4dc390 !important;
+}
