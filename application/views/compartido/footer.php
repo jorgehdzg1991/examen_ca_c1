@@ -4,7 +4,7 @@
     <footer role="contentinfo">
         <div class="clearfix">
             <ul class="list-unstyled list-inline">
-                <li>M A T A T E N A &copy; 2016</li>
+                <li>Tecnologías Web de Código Abierto &copy; 2016</li>
                 <button class="pull-right btn btn-inverse-alt btn-xs hidden-print" id="back-to-top"><i class="fa fa-arrow-up"></i></button>
             </ul>
         </div>

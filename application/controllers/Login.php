@@ -6,6 +6,8 @@ class Login extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->model("colaboradores_model");
     }
 
     public function index()
@@ -15,12 +17,10 @@ class Login extends MY_Controller
 
     public function start()
     {
-        $this->load->model("usuarios_model");
-
-        $username = $_POST["login"];
+        $login = $_POST["login"];
         $password = $_POST["password"];
 
-        $usuario = $this->usuarios_model->obtenerPorCredenciales($username, $password);
+        $usuario = $this->colaboradores_model->obtenerPorCredenciales($login, $password);
 
         if ($usuario != false) {
             $this->session->set_userdata(["auth" => [

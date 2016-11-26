@@ -12,23 +12,26 @@ class Colaboradores_model extends CI_Model
         $this->nombre_tabla = "ctl_colaboradores";
     }
 
-    public function obtenerTodos() {
-
+    public function obtenerTodos()
+    {
+        $query = $this->db->get_where($this->nombre_tabla, ["estatus" => 1]);
+        return $query->result_array();
     }
 
-    public function obtenerPorId($id) {
-
+    public function obtenerPorId($id)
+    {
+        $query = $this->db->get_where($this->nombre_tabla, ["id" => $id], 1);
+        return $query->row_array();
     }
 
-    public function crear() {
+    public function obtenerPorCredenciales($login, $password)
+    {
+        $query = $this->db->get_where($this->nombre_tabla, [
+            "login" => $login,
+            "passwd" => md5($password),
+            "estatus" => 1
+        ], 1);
 
-    }
-
-    public function editar() {
-
-    }
-
-    public function eliminar() {
-        
+        return $query->row_array();
     }
 }
