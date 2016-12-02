@@ -5,6 +5,8 @@ abstract class MY_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->model("acciones_model");
     }
 
     final protected function CargarVista($nombreVista, $datos = null)
@@ -58,5 +60,14 @@ abstract class MY_Controller extends CI_Controller
     final protected function unsetMensajeFlash()
     {
         $this->session->unset_userdata("mensajeFlash");
+    }
+
+    final protected function registrarAccion($accion, $idUsuario) {
+        $datos = [
+            "accion" => $accion,
+            "colaboradores_id" => $idUsuario
+        ];
+
+        $this->acciones_model->crear($datos);
     }
 }
