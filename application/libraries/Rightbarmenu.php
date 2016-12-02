@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Rightbarmenu
 {
@@ -8,6 +9,16 @@ class Rightbarmenu
             "Inicio" => [
                 "link" => "inicio/index",
                 "icono" => "fa fa-home",
+                "activo" => false
+            ],
+            "Nuevo ticket" => [
+                "link" => "nuevo/index",
+                "icono" => "fa fa-file-o",
+                "activo" => false
+            ],
+            "Mis tickets" => [
+                "link" => "tickets/index",
+                "icono" => "fa fa-user",
                 "activo" => false
             ]
         ];

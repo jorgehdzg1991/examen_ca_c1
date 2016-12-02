@@ -67,7 +67,7 @@ class Login extends MY_Controller
             "El usuario " . $usuario["nombre"] . " cerró su sesión",
             $usuario["id"]
         );
-        
+
         $this->session->unset_userdata("auth");
 
         $this->setMensajeFlash("¡Hasta pronto!", "", "info");

@@ -1,15 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Colaboradores_model extends CI_Model
+class Colaboradores_model extends MY_Model
 {
-    private $nombre_tabla;
-
     public function __construct()
     {
-        parent::__construct();
-
-        $this->nombre_tabla = "ctl_colaboradores";
+        parent::__construct("ctl_colaboradores");
     }
 
     public function obtenerPorCredenciales($login, $password)
