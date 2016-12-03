@@ -48,14 +48,12 @@ class Colaboradores_model extends MY_Model
                 depar.nombre AS departamento
             FROM
                 ctl_colaboradores AS colab
-            INNER JOIN ctl_departamentos AS depar ON colab.departamentos_id = depar.id
-            WHERE
-                depar.id = $idDepartamento";
+            INNER JOIN ctl_departamentos AS depar ON colab.departamentos_id = depar.id";
 
         if ($idDepartamento != "0") {
             $sql .= "
             WHERE
-                depar.areas_id = $idArea";
+                depar.id = $idDepartamento";
         }
 
         $query = $this->db->query($sql);

@@ -30,7 +30,7 @@ abstract class MY_Model extends CI_Model
 
     final public function crear($data)
     {
-        return $this->db->insert($this->nombre_tabla, $data) ? true : false;
+        return $this->db->insert($this->nombre_tabla, $data) ? $this->db->insert_id() : false;
     }
 
     final public function editar($id, $data)

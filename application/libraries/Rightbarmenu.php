@@ -18,7 +18,12 @@ class Rightbarmenu
             ],
             "Mis tickets" => [
                 "link" => "tickets/index",
-                "icono" => "fa fa-user",
+                "icono" => "fa fa-ticket",
+                "activo" => false
+            ],
+            "Contestar tickets" => [
+                "link" => "contestar/index",
+                "icono" => "fa fa-comment-o",
                 "activo" => false
             ]
         ];

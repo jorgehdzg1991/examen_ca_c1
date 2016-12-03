@@ -49,20 +49,32 @@ class Nuevo extends MY_Controller
         $colaborador = $_POST["colaborador"];
         $pregunta = $_POST["pregunta"];
 
-        $usuario = $this->session->userdata("auth");
+        $emisor = $this->session->userdata("auth");
+        $receptor = $this->colaboradores_model->obtenerPorId($colaborador);
 
         $datos = [
             "pregunta" => $pregunta,
-            "emisor_id" => $usuario["id"],
-            "receptor_id" => $colaborador
+            "emisor_id" => $emisor["id"],
+            "receptor_id" => $receptor["id"]
         ];
 
         $result = $this->tickets_model->crear($datos);
 
-        if ($result) {
-            $accion = $usuario["nombre"] . " ha creado un nuevo ticket";
-            $this->registrarAccion($accion, $usuario["id"]);
-            $this->setMensajeFlash("Éxito", "Ticket creado correctamente", "success");
+        if ($result != false) {
+            $ticket = $this->tickets_model->obtenerPorId($result);
+
+            if ($this->enviarCorreo($emisor, $receptor, $ticket)) {
+                $this->setMensajeFlash("Éxito", "Ticket creado correctamente", "success");
+            } else {
+                $this->setMensajeFlash(
+                    "Algo salió mal",
+                    "El ticket se ha creado correctamente pero no pudo notificarse por correo",
+                    "info"
+                );
+            }
+
+            $accion = $emisor["nombre"] . " ha creado un nuevo ticket";
+            $this->registrarAccion($accion, $emisor["id"]);
             redirect("inicio/index");
         } else {
             $this->setMensajeFlash("Error", "No se pudo generar el ticket", "error");
@@ -80,5 +92,38 @@ class Nuevo extends MY_Controller
 
     public function obtenerColaboradoresDepartamento($idDepartamento) {
         echo json_encode($this->colaboradores_model->obtenerPorDepartamento($idDepartamento));
+    }
+
+    private function enviarCorreo($emisor, $receptor, $ticket) {
+        $fechaTicket = new DateTime($ticket["fecha"]);
+
+        $mail = new PHPMailer();
+
+        $mail->isSMTP();
+        $mail->SMTPDebug = 1;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465;
+        $mail->Username = "mtwydm2016@gmail.com";
+        $mail->Password = "lasalle2016";
+
+        $mail->setFrom("sistema@mtwydm.com", "Sistema de tickets");
+
+        $mail->addAddress($receptor["correo"]);
+        $mail->addCC($emisor["correo"]);
+
+        $mail->isHTML(true);
+
+        $mail->Subject = utf8_decode($emisor["nombre"] . " ha creado un nuevo ticket");
+        $mail->Body = '
+        <h1>Se ha creado un nuevo ticket :)</h1>
+        <p>
+            <strong>Creado por</strong>: ' . $emisor["nombre"] . '<br>
+            <strong>Fecha</strong>: ' .  $fechaTicket->format('d/m-Y H:i:s') . '<br>
+            <strong>Pregunta</strong>: ' . $ticket["pregunta"] . '
+        </p>';
+
+        return $mail->send();
     }
 }

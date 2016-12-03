@@ -27,6 +27,7 @@ class Login extends MY_Controller
                 "id" => $usuario["id"],
                 "nombre" => $usuario["nombre"],
                 "login" => $usuario["login"],
+                "correo" => $usuario["correo"],
                 "perfil" => $usuario["perfil"],
                 "area" => $usuario["areas_id"],
                 "departamento" => $usuario["departamentos_id"]

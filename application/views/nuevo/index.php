@@ -85,7 +85,7 @@
     }
 
     function actualizarColaboradores(datos) {
-        $('#cmbColaborador').html('');
+        $('#cmbColaborador').html('<option value="0">Seleccione un colaborador</option>');
         for (var i = 0; i < datos.length; i++) {
             $('#cmbColaborador').append('<option value="' + datos[i]['id'] + '">' + datos[i]['nombre'] + ' (' + datos[i]['departamento'] + ')</option>');
         }
@@ -109,6 +109,14 @@
                         success: function(datos) {
                             actualizarColaboradores(datos);
                         }
+                    });
+                },
+                error: function (error) {
+                    pnotify({
+                        title: 'Error',
+                        text: 'Ha ocurrido un error en la aplicación. Intente recargar la página para corregir el error',
+                        history: false,
+                        type: 'error'
                     });
                 }
             });
