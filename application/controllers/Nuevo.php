@@ -11,6 +11,7 @@ class Nuevo extends MY_Controller
         $this->load->model("colaboradores_model");
         $this->load->model("departamentos_model");
         $this->load->model("areas_model");
+        $this->load->model("seguimientos_model");
     }
 
     public function index()
@@ -38,6 +39,7 @@ class Nuevo extends MY_Controller
         }
 
         $this->CargarVista("nuevo/index", [
+            "titulo" => "Nuevo ticket",
             "colaboradores" => $datosColaboradores,
             "departamentos" => $departamentos,
             "areas" => $areas
@@ -62,6 +64,11 @@ class Nuevo extends MY_Controller
 
         if ($result != false) {
             $ticket = $this->tickets_model->obtenerPorId($result);
+
+            $this->seguimientos_model->crear([
+                "observaciones" => "Se ha creado el ticket",
+                "tickets_id" => $ticket["id"]
+            ]);
 
             if ($this->enviarCorreo($emisor, $receptor, $ticket)) {
                 $this->setMensajeFlash("Éxito", "Ticket creado correctamente", "success");
@@ -100,7 +107,7 @@ class Nuevo extends MY_Controller
         $mail = new PHPMailer();
 
         $mail->isSMTP();
-        $mail->SMTPDebug = 1;
+        $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
         $mail->Host = "smtp.gmail.com";

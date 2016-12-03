@@ -18,7 +18,7 @@ abstract class MY_Model extends CI_Model
 
     final public function obtenerTodos()
     {
-        $query = $this->db->get_where($this->nombre_tabla);
+        $query = $this->db->get($this->nombre_tabla);
         return $query->result_array();
     }
 
