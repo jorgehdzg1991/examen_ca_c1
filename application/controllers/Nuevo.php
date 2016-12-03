@@ -69,4 +69,16 @@ class Nuevo extends MY_Controller
             redirect("nuevo/index");
         }
     }
+
+    public function obtenerDepartamentosArea($idArea) {
+        echo json_encode($this->departamentos_model->obtenerPorArea($idArea));
+    }
+
+    public function obtenerColaboradoresArea($idArea) {
+        echo json_encode($this->colaboradores_model->obtenerPorArea($idArea));
+    }
+
+    public function obtenerColaboradoresDepartamento($idDepartamento) {
+        echo json_encode($this->colaboradores_model->obtenerPorDepartamento($idDepartamento));
+    }
 }

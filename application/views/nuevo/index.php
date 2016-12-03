@@ -75,3 +75,55 @@
         </div>
     </div>
 </div>
+<script>
+    function actualizarDepartamentos(datos) {
+        $('#cmbDepartamento').html('<option value="0">Todos los departamentos</option>');
+        for (var i = 0; i < datos.length; i++) {
+            $('#cmbDepartamento').append('<option value="' + datos[i]['id'] + '">' + datos[i]['nombre'] + '</option>');
+        }
+        $('#cmbDepartamento').select2();
+    }
+
+    function actualizarColaboradores(datos) {
+        $('#cmbColaborador').html('');
+        for (var i = 0; i < datos.length; i++) {
+            $('#cmbColaborador').append('<option value="' + datos[i]['id'] + '">' + datos[i]['nombre'] + ' (' + datos[i]['departamento'] + ')</option>');
+        }
+        $('#cmbColaborador').select2();
+    }
+
+    $(document).ready(function () {
+        $("#cmbArea").change(function () {
+            var idArea = $("#cmbArea").val();
+            $.ajax({
+                url: 'http://localhost:8000/nuevo/obtenerDepartamentosArea/' + idArea,
+                method: 'GET',
+                dataType: 'json',
+                success: function(datos) {
+                    actualizarDepartamentos(datos);
+
+                    $.ajax({
+                        url: 'http://localhost:8000/nuevo/obtenerColaboradoresArea/' + idArea,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function(datos) {
+                            actualizarColaboradores(datos);
+                        }
+                    });
+                }
+            });
+        });
+
+        $("#cmbDepartamento").change(function () {
+            var idDepartamento = $("#cmbDepartamento").val();
+            $.ajax({
+                url: 'http://localhost:8000/nuevo/obtenerColaboradoresDepartamento/' + idDepartamento,
+                method: 'GET',
+                dataType: 'json',
+                success: function(datos) {
+                    actualizarColaboradores(datos);
+                }
+            });
+        });
+    });
+</script>
