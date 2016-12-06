@@ -61,7 +61,6 @@ class Login extends MY_Controller
 
     public function end()
     {
-
         $usuario = $this->session->userdata("auth");
 
         $this->registrarAccion(

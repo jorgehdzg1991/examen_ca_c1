@@ -82,7 +82,7 @@ class Nuevo extends MY_Controller
 
             $accion = $emisor["nombre"] . " ha creado un nuevo ticket";
             $this->registrarAccion($accion, $emisor["id"]);
-            redirect("inicio/index");
+            redirect("tickets/index");
         } else {
             $this->setMensajeFlash("Error", "No se pudo generar el ticket", "error");
             redirect("nuevo/index");

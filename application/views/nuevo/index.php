@@ -130,6 +130,14 @@
                 dataType: 'json',
                 success: function(datos) {
                     actualizarColaboradores(datos);
+                },
+                error: function (error) {
+                    pnotify({
+                        title: 'Error',
+                        text: 'Ha ocurrido un error en la aplicación. Intente recargar la página para corregir el error',
+                        history: false,
+                        type: 'error'
+                    });
                 }
             });
         });
