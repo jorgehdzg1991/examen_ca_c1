@@ -19,7 +19,7 @@ class Seguimientos_model extends MY_Model
             opr_seguimientos
         INNER JOIN cat_estatus ON opr_seguimientos.estatus_id = cat_estatus.id
         WHERE
-            opr_seguimientos.tickets_id = 1";
+            opr_seguimientos.tickets_id = $idTicket";
 
         $query = $this->db->query($sql);
 

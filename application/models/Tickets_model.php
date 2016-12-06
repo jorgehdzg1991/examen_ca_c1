@@ -22,6 +22,7 @@ class Tickets_model extends MY_Model
         $sql = "
         SELECT
             segui.observaciones AS observaciones,
+            estat.id AS idEstatus,
             estat.nombre AS estatus
         FROM
             opr_seguimientos AS segui
