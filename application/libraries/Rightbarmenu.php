@@ -25,6 +25,11 @@ class Rightbarmenu
                 "link" => "contestar/index",
                 "icono" => "fa fa-comment-o",
                 "activo" => false
+            ],
+            'Bitácora de acciones' => [
+                'link' => 'bitacora/index',
+                'icono' => 'fa fa-list-ol',
+                'activo' => false
             ]
         ];
 
